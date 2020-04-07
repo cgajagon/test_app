@@ -14,11 +14,13 @@ app = Celery("test_project")
 app.config_from_object("django.conf:settings", namespace="CELERY")
 
 app.conf.update(
-CELERYBEAT_SCHEDULE={
-'get_users_count': {
-'task': 'get_users_count',
-'schedule': crontab(seconds=10)
-}})
+    CELERYBEAT_SCHEDULE = {
+        'get_users_count': {
+            'task': 'get_users_count',
+            'schedule': crontab(minute=10)
+        }
+    }
+)
 
 # Load task modules from all registered Django app configs.
 app.autodiscover_tasks()
